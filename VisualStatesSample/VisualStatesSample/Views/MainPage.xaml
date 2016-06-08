@@ -1,0 +1,90 @@
+﻿<Page
+    x:Class="VisualStatesSample.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VisualStatesSample.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ViewModel="using:VisualStatesSample.ViewModel"
+    mc:Ignorable="d"
+    xmlns:formatter ="using:VisualStatesSample"
+    xmlns:Controls="using:VisualStatesSample.Control"
+    Loaded="PageLoaded">
+
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MenuSelect.Visibility" Value="Visible" />
+                        <Setter Target="listProducts.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MenuSelect.Visibility" Value="Collapsed" />
+                        <Setter Target="listProducts.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Button x:Name="MenuSelect" Content="&#xE292;" 
+                FontFamily="Segoe UI Symbol" 
+                FontWeight="Bold"
+                FontSize="30"
+                Visibility="Collapsed"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding ShowProductCommand}"/>
+
+        <GridView x:Name="ProductDetails"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+    ScrollViewer.HorizontalScrollMode="Disabled"
+    ScrollViewer.VerticalScrollBarVisibility="Auto"
+    ScrollViewer.VerticalScrollMode="Auto"                 
+                  Grid.Row="1"
+                      ItemsSource="{Binding Entities}"
+                      Margin="0" 
+                      Padding="0">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Controls:ProductDataTemplate 
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"/>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+        <ListView x:Name="listProducts" 
+                      ItemsSource="{Binding Entities}"
+                      Visibility="Collapsed" 
+                      Margin="0" 
+                  Grid.Row="1"
+                      Padding="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Controls:ListProductControl 
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

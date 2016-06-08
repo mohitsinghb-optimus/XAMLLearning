@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="TemplateSelector.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TemplateSelector"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:service="using:TemplateSelector.Service"
+    mc:Ignorable="d"
+    Loaded="PageLoaded">
+    <Page.Resources>
+        <DataTemplate x:Name="FirstDataTemplate">
+            <StackPanel>
+                <Image Source="{Binding Image}"
+                       Width="200" 
+                       Height="200"/>
+                <TextBlock Text="{Binding Description}"
+                           FontSize="24"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Name="SecondDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Image}"
+                       Width="200" 
+                       Height="200"/>
+                <TextBlock Text="{Binding Description}"
+                           FontSize="24"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <service:TemplateSelectorUtility x:Key="MyTemplateSelector"
+                          FirstDataTemplate="{StaticResource FirstDataTemplate}"
+                          SecondDataTemplate="{StaticResource SecondDataTemplate}" />
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ItemsControl ItemTemplateSelector="{StaticResource MyTemplateSelector}" ItemsSource="{Binding Entities}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</Page>
