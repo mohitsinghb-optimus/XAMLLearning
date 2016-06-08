@@ -1,1 +1,0 @@
-c:\users\optimus47.optimusdom\documents\visual studio 2015\Projects\VisualStatesSample\VisualStatesSample\VisualStatesSample.csproj;x86
