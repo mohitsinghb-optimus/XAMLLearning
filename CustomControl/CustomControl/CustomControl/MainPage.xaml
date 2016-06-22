@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="CustomControl.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:control="using:ControlLib"
+    mc:Ignorable="d" 
+    x:Name="thisPage"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <control:CarouselDemo>
+            <control:CarouselDemo.PrevNavigationContentTemplate>
+                <DataTemplate>
+                    <Grid IsTapEnabled="True" Width="30" Padding="2" Background="White" VerticalAlignment="Stretch">
+                        <Image Source="/Resources/arrow-left.png" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </control:CarouselDemo.PrevNavigationContentTemplate>
+            <control:CarouselDemo.NextNavigationContentTemplate>
+                <DataTemplate>
+                    <Grid IsTapEnabled="True" Width="30" Padding="2" Background="White" VerticalAlignment="Stretch">
+                        <Image Source="/Resources/arrow-right.png" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </control:CarouselDemo.NextNavigationContentTemplate>
+        </control:CarouselDemo>
+
+        <!--#region ItemControl-->
+        <ItemsControl Grid.Row="1" 
+                      HorizontalAlignment="Center"
+                      ItemsSource="{Binding MyProperty}"
+                      Margin="8">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Ellipse Height="9" 
+                             Width="9"
+                             Fill ="#CCCCCC"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!--#endregion-->
+
+    </Grid>
+</Page>
